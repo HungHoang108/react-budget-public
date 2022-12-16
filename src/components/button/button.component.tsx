@@ -1,7 +1,13 @@
 import React from 'react'
 
-export const Button = () => {
+interface buttonName {
+  name : string
+}
+export const Button = ({name} : buttonName) => {
+  
   return (
-    <div>button</div>
+    <div>
+      <button>{name}</button>
+    </div>
   )
 }
