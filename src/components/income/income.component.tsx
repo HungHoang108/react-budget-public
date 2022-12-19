@@ -6,6 +6,8 @@ export const Income = (props: { getIncome: (income: any) => void }) => {
   const [income, setIncome] = useState<number>();
   const handleChange = (e: { target: { value: any } }) => {
     const incomeAmount = e.target.value;
+    console.log("-----", typeof incomeAmount);
+
     setIncome(incomeAmount);
   };
 

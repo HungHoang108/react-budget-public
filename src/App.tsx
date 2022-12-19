@@ -7,7 +7,7 @@ import { Balance } from "./components/balance/balance.component";
 import { useState } from "react";
 
 const App = () => {
-  const [salary, setSalary] = useState<number | undefined>();
+  const [salary, setSalary] = useState<number>();
   const [expense, setExpense] = useState<number | undefined>();
   const [savingTarget, setSavingTarget] = useState<number | undefined>();
 
@@ -24,7 +24,7 @@ const App = () => {
     setSavingTarget(input);
   };
 
-  console.log("salary", salary);
+  console.log("salary", typeof salary);
   console.log("expense", expense);
   console.log("saving target", savingTarget);
 
