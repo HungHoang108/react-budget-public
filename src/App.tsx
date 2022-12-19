@@ -4,16 +4,30 @@ import { Income } from "./components/income/income.component";
 import { Saving } from "./components/saving/saving.component";
 import { Balance } from "./components/balance/balance.component";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const App = () => {
-  const [salary, setSalary] = useState();
+  const [salary, setSalary] = useState<number | undefined>();
+  const [expense, setExpense] = useState<number | undefined>();
+  const [savingTarget, setSavingTarget] = useState<number | undefined>();
 
-  const getIncome = (input: any) => {
+
+  const getIncome = (input: number) => {
     setSalary(input);
-    console.log("input is :", input);
   };
-  console.log("salary is :", salary);
+
+  const getExpense = (input: number) => {
+    setExpense(input);
+  };
+
+  const getSavingTarget = (input: number) => {
+    setSavingTarget(input);
+  };
+
+  console.log("salary", salary);
+  console.log("expense", expense);
+  console.log("saving target", savingTarget);
+
   return (
     <>
       <div className="App">
@@ -21,15 +35,15 @@ const App = () => {
           <Income getIncome={getIncome} />
         </div>
         <div>
-          <Expense />
+          <Expense getExpense={getExpense} />
         </div>
         <div>
-          <Saving />
+          <Saving getSavingTarget={getSavingTarget} />
         </div>
       </div>
       <br />
       <div>
-        <Balance />
+        <Balance salary={salary} expense={expense} savingTarget={savingTarget}/>
       </div>
     </>
   );
