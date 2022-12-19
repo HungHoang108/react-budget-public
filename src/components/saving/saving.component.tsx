@@ -25,11 +25,11 @@ export const Saving = (props: { getSavingTarget: (income: any) => void }) => {
         />
       </div>
       <br />
-      <button onClick={addSavingTarget}>Set test</button>
-      <Button name="Set saving target" />
+      <button onClick={addSavingTarget}>Set saving target</button>
+      {/* <Button name="Set saving target" /> */}
       <div>
-        <h4>Current saving: </h4>
-        <h4>Target: </h4>
+        <h4>Current saving: {}</h4>
+        <h4>Target: {savingTarget}</h4>
         <h4>Progress: </h4>
       </div>
       <div className="progress">

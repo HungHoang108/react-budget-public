@@ -34,8 +34,8 @@ export const Income = (props: { getIncome: (income: any) => void }) => {
         <input type="date" name="incomeDate" />
       </div>
       <br />
-      <button onClick={addIncome}>Add income test</button>
-      <Button name="Add income" />
+      <button onClick={addIncome}>Add income</button>
+      {/* <Button name="Add income" /> */}
     </div>
   );
 };

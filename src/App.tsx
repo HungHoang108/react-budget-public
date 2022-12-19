@@ -10,7 +10,7 @@ const App = () => {
   const [salary, setSalary] = useState<number>();
   const [expense, setExpense] = useState<number | undefined>();
   const [savingTarget, setSavingTarget] = useState<number | undefined>();
-
+  const [transferToSaving, setTransfertoSaving] = useState<number | undefined>();
 
   const getIncome = (input: number) => {
     setSalary(input);
@@ -24,9 +24,9 @@ const App = () => {
     setSavingTarget(input);
   };
 
-  console.log("salary", typeof salary);
-  console.log("expense", expense);
-  console.log("saving target", savingTarget);
+  const getTransfer = (input: number) => {
+    setTransfertoSaving(input);
+  };
 
   return (
     <>
@@ -43,7 +43,12 @@ const App = () => {
       </div>
       <br />
       <div>
-        <Balance salary={salary} expense={expense} savingTarget={savingTarget}/>
+        <Balance
+          salary={salary}
+          expense={expense}
+          savingTarget={savingTarget}
+          getTransfer={getTransfer}
+        />
       </div>
     </>
   );
