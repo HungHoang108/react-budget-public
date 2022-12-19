@@ -9,11 +9,10 @@ import { IncomeContext } from "./context/context";
 
 const App = () => {
   const { setIncome, income } = useContext(IncomeContext);
-  useEffect(()=> {
-    setIncome(77)
-    
-  })
-  console.log(income)
+  useEffect(() => {
+    setIncome(7);
+  });
+  console.log(income);
   return (
     <>
       <div className="App">
