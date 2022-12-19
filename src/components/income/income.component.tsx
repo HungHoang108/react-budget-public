@@ -1,9 +1,18 @@
 import React from "react";
 import { Button } from "../button/button.component";
-import { useContext, useEffect } from "react";
+import { useState } from "react";
 
-export const Income = () => {
+export const Income = (props: { getIncome: (income : any) => void; }) => {
+  const [income, setIncome] = useState();
+  const handleChange = (e: { target: { value: any; }; }) => {
+    const incomeAmount = e.target.value;
+    setIncome(incomeAmount)
+    console.log(incomeAmount)
+  };
 
+  const addIncome = ()=>{
+    props.getIncome(income)
+  }
   return (
     <div>
       <div>
@@ -12,13 +21,14 @@ export const Income = () => {
       </div>
       <div>
         <h5>Amount of Income</h5>
-        <input type="number" name="amountOfIncome" />
+        <input type="number" name="amountOfIncome" onChange={handleChange} />
       </div>
       <div>
         <h5>Date of income</h5>
         <input type="date" name="incomeDate" />
       </div>
       <br />
+      <button onClick={addIncome}>Add income test</button>
       <Button name="Add income" />
     </div>
   );

@@ -4,16 +4,21 @@ import { Income } from "./components/income/income.component";
 import { Saving } from "./components/saving/saving.component";
 import { Balance } from "./components/balance/balance.component";
 
-import { useContext, useEffect } from "react";
-// import { IncomeContext } from "./context/context";
+import { useState, useEffect } from "react";
 
 const App = () => {
-;
+  const [salary, setSalary] = useState();
+
+  const getIncome = (input: any) => {
+    setSalary(input);
+    console.log("input is :", input);
+  };
+  console.log("salary is :", salary);
   return (
     <>
       <div className="App">
         <div>
-          <Income />
+          <Income getIncome={getIncome} />
         </div>
         <div>
           <Expense />
