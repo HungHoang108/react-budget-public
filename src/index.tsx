@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { Context } from './context/context';
+// import { Context } from './context/context';
 
 
 const root = ReactDOM.createRoot(
@@ -10,9 +10,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Context >
+    {/* <Context > */}
       <App /> 
-    </Context>
+    {/* </Context> */}
   </React.StrictMode>
 );
 

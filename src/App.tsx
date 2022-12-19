@@ -5,14 +5,10 @@ import { Saving } from "./components/saving/saving.component";
 import { Balance } from "./components/balance/balance.component";
 
 import { useContext, useEffect } from "react";
-import { IncomeContext } from "./context/context";
+// import { IncomeContext } from "./context/context";
 
 const App = () => {
-  const { setIncome, income } = useContext(IncomeContext);
-  useEffect(() => {
-    setIncome(7);
-  });
-  console.log(income);
+;
   return (
     <>
       <div className="App">

@@ -1,7 +1,9 @@
 import React from "react";
 import { Button } from "../button/button.component";
+import { useContext, useEffect } from "react";
 
 export const Income = () => {
+
   return (
     <div>
       <div>

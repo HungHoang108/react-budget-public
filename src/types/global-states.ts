@@ -1,4 +1,4 @@
-export interface IIncome {
-  income: number
-  setIncome: (n : number) => number;
-}
+// export interface IIncome {
+//   income: number
+//   setIncome: (n : number) => number;
+// }
