@@ -13,7 +13,7 @@ export const Balance = (props: any) => {
   };
 
   const handleClick = () => {
-    props.getTransfer(transferAmount);
+    props.getTransfer(parseInt(transferAmount));
     setTransferStatus(!transferStatus);
   };
 
