@@ -1,41 +1,57 @@
 import React from "react";
-import { Button } from "../button/button.component";
-import { useState } from "react";
+import { useState, FC, ChangeEvent } from "react";
+import { IncomeClass } from "../../class/income";
 
 export const Income = (props: { getIncome: (income: any) => void }) => {
-  const [income, setIncome] = useState<number>();
-  const handleChange = (e: { target: { value: any } }) => {
-    const incomeAmount = e.target.value;
-    console.log("-----", typeof incomeAmount);
+  const [incomeSource, setIncomeSource] = useState<string>("");
+  const [incomeAmount, setIncomeAmount] = useState<number>(0);
+  // const [date, setDate] = useState<Date>()
+  const [income, setIncome] = useState<IncomeClass[]>([]);
 
-    setIncome(incomeAmount);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (e.target.name === "incomeSource") {
+      setIncomeSource(e.target.value);
+    }
+
+    if (e.target.name === "incomeAmount") {
+      setIncomeAmount(Number(e.target.value));
+    }
   };
 
-  const addIncome = () => {
+  const addIncome = (): void => {
+    const newIncome = {
+      incomeSource: incomeSource,
+      incomeAmount: incomeAmount,
+    };
+    setIncome([...income, newIncome]);
     props.getIncome(income);
   };
   return (
     <div>
       <div>
         <h5>Income Source</h5>
-        <input type="text" name="incomeSource" />
+        <input
+          type="text"
+          name="incomeSource"
+          onChange={handleChange}
+          value={incomeSource}
+        />
       </div>
       <div>
         <h5>Amount of Income</h5>
         <input
           type="number"
-          name="amountOfIncome"
+          name="incomeAmount"
           onChange={handleChange}
-          value={income}
+          value={incomeAmount}
         />
       </div>
       <div>
         <h5>Date of income</h5>
-        <input type="date" name="incomeDate" />
+        <input type="date" name="date" />
       </div>
       <br />
       <button onClick={addIncome}>Add income</button>
-      {/* <Button name="Add income" /> */}
     </div>
   );
 };

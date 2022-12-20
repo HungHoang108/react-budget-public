@@ -1,31 +1,29 @@
-import React, { useState } from "react";
-import { Button } from "../button/button.component";
+import React, { useState, FC, ChangeEvent } from "react";
 import "./saving.styles.component.css";
+import { AllSaving } from "../../class/saving-target";
 
-export const Saving = (props: {
-  getSavingTarget: (income: any) => void;
-  savingAmount: number[] | undefined;
-}) => {
-  const [savingTarget, setSavingTarget] = useState<number | undefined>();
+// : {
+//   getSavingTarget: (arg0: number) => void;
+//   savingAmount: AllSaving[];
+// }
+export const Saving = (props: { getSavingTarget: (arg0: number) => void; }) => {
+  const [savingTarget, setSavingTarget] = useState<number>(0);
 
-  console.log(props.savingAmount);
-
-  const handleChange = (e: { target: { value: any } }) => {
-    const savingAmount = e.target.value;
-    setSavingTarget(savingAmount);
-    console.log(savingAmount);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setSavingTarget(Number(e.target.value));
   };
 
-  const addSavingTarget = () => {
+  const addSavingTarget = (): void => {
     props.getSavingTarget(savingTarget);
   };
+
   return (
     <div>
       <div>
         <h5>Set target</h5>
         <input
           type="number"
-          name="setTarget"
+          name="savingTarget"
           onChange={handleChange}
           value={savingTarget}
         />
@@ -33,7 +31,7 @@ export const Saving = (props: {
       <br />
       <button onClick={addSavingTarget}>Set saving target</button>
       <div>
-        <h4>Current saving: {props.savingAmount}</h4>
+        <h4>Current saving: {}</h4>
         <h4>Target: {savingTarget}</h4>
         <h4>Progress: </h4>
       </div>

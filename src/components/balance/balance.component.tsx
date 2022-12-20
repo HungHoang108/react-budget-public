@@ -1,30 +1,34 @@
 import React from "react";
-import { Button } from "../button/button.component";
-import { useState } from "react";
+import { useState, FC, ChangeEvent } from "react";
 
-export const Balance = (props: any) => {
-  const [transferAmount, setTransferAmount] = useState<any>();
+import { TransferAmount } from "../../class/transfer";
+import { IncomeClass } from "../../class/income";
+import { ExpenseClass } from "../../class/expense";
+
+export const Balance = (props: { getTransfer: (arg0: TransferAmount[]) => void; salary: IncomeClass[]; expense: ExpenseClass[]; }) => {
+  const [transferAmount, setTransferAmount] = useState<number>(0);
+  const [allTransfer, setAllTransfer] = useState<TransferAmount[]>([]);
   const [transferStatus, setTransferStatus] = useState<boolean>(false);
 
-  const handlechange = (e: { target: { value: any } }) => {
-    const transferAmount = e.target.value;
-    setTransferAmount(transferAmount);
-    console.log(typeof transferAmount);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setTransferAmount(Number(e.target.value));
   };
 
-  const handleClick = () => {
-    props.getTransfer(parseInt(transferAmount));
+  const addTransfer = (): void => {
+    const newTransfer = {
+      transferAmount: transferAmount,
+    };
+    setAllTransfer([...allTransfer, newTransfer]);
+    props.getTransfer(allTransfer);
     setTransferStatus(!transferStatus);
   };
 
-  const salary = props.salary ? props.salary : 0;
-  const expense = props.expense ? props.expense : 0;
+  let salary = props.salary?.reduce((x, y)=> x + y.incomeAmount, 0)
+  console.log("salary ", salary)
+  const expense = props.expense?.reduce((x, y)=> x + y.expenseAmount, 0)
   const transferAmountToSavingAccount =
     transferAmount && !transferStatus ? transferAmount : 0;
-  let balance =
-    parseInt(salary) -
-    parseInt(expense) -
-    parseInt(transferAmountToSavingAccount);
+  let balance = salary - expense;
 
   return (
     <div>
@@ -34,9 +38,9 @@ export const Balance = (props: any) => {
         type="number"
         name="transferAmount"
         value={transferAmount}
-        onChange={handlechange}
+        onChange={handleChange}
       />
-      <button onClick={handleClick}>Transfer</button>
+      <button onClick={addTransfer}>Transfer</button>
     </div>
   );
 };

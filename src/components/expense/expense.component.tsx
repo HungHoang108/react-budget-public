@@ -1,14 +1,26 @@
-import React, { useState } from "react";
-import { Button } from "../button/button.component";
+import React, { useState, FC, ChangeEvent } from "react";
+import { ExpenseClass } from "../../class/expense";
 
 export const Expense = (props: { getExpense: (income: any) => void }) => {
-  const [expense, setExpense] = useState<number>();
-  const handleChange = (e: { target: { value: any } }) => {
-    const expenseAmount = e.target.value;
-    setExpense(expenseAmount);
+  const [expenseSource, setExpenseSource] = useState<string>("");
+  const [expenseAmount, setExpenseAmount] = useState<number>(0);
+  // const [date, setDate] = useState<Date>()
+  const [expense, setExpense] = useState<ExpenseClass[]>([]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (e.target.name === "expenseSource") {
+      setExpenseSource(e.target.value);
+    } else if (e.target.name === "expenseAmount") {
+      setExpenseAmount(Number(e.target.value));
+    }
   };
 
-  const addExpense = () => {
+  const addExpense = (): void => {
+    const newExpense = {
+      expenseSource: expenseSource,
+      expenseAmount: expenseAmount,
+    };
+    setExpense([...expense, newExpense]);
     props.getExpense(expense);
   };
 
@@ -16,11 +28,21 @@ export const Expense = (props: { getExpense: (income: any) => void }) => {
     <div>
       <div>
         <h5>Expense Source</h5>
-        <input type="text" name="expenseSource" />
+        <input
+          type="text"
+          name="expenseSource"
+          onChange={handleChange}
+          value={expenseSource}
+        />
       </div>
       <div>
         <h5>Amount of expense</h5>
-        <input type="number" name="amountOfExpense" value={expense} onChange={handleChange}/>
+        <input
+          type="number"
+          name="expenseAmount"
+          value={expenseAmount}
+          onChange={handleChange}
+        />
       </div>
       <div>
         <h5>Date of expense</h5>
@@ -28,7 +50,6 @@ export const Expense = (props: { getExpense: (income: any) => void }) => {
       </div>
       <br />
       <button onClick={addExpense}>Add expense</button>
-      {/* <Button name="Add expense" /> */}
     </div>
   );
 };
