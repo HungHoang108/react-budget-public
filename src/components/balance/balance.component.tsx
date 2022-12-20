@@ -1,19 +1,24 @@
 import { useState, ChangeEvent } from "react";
+import { TotalTransfer } from "../../class/transfer";
 
 export const Balance = (props: {
-  getTransfer: (arg0: number) => void;
+  getTransfer: React.Dispatch<React.SetStateAction<TotalTransfer[]>>;
   totalBalance: number;
 }) => {
   const [transferAmount, setTransferAmount] = useState(0);
-  const [transferStatus, setTransferStatus] = useState<boolean>(false);
+  const [totalTransfer, setTotalTransfer] = useState<TotalTransfer[]>()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setTransferAmount(Number(e.target.value));
   };
 
   const addTransfer = (): void => {
-    props.getTransfer(transferAmount);
-    // setTransferStatus(!transferStatus);
+    const newTransfer = {
+      totalTransferAmount: transferAmount
+    
+    };
+    props.getTransfer((prev)=> [...prev, newTransfer]);
+    console.log("----", transferAmount);
   };
 
   return (
@@ -23,7 +28,6 @@ export const Balance = (props: {
       <input
         type="number"
         name="transferAmount"
-        value={transferAmount}
         onChange={handleChange}
       />
       <button onClick={addTransfer}>Transfer</button>

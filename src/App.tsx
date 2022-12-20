@@ -7,18 +7,22 @@ import { useState, useEffect } from "react";
 
 import { ExpenseClass } from "./class/expense";
 import { IncomeClass } from "./class/income";
+import { TotalTransfer } from "./class/transfer";
 
 const App = () => {
   const [salary, setSalary] = useState<IncomeClass[]>([]);
   const [expense, setExpense] = useState<ExpenseClass[]>([]);
   const [savingTarget, setSavingTarget] = useState(0);
-  const [transferToSaving, setTransfertoSaving] = useState(0);
+  const [transferToSaving, setTransfertoSaving] = useState<TotalTransfer[]>([]);
   const [balance, setBalance] = useState(0);
-
+  const income = salary.reduce((a, b) => a + b.incomeAmount, 0);
+  const allExpense = expense.reduce((a, b) => a + b.expenseAmount, 0);
+  const allSaving = transferToSaving.reduce(
+    (a, b) => a + b.totalTransferAmount,
+    0
+  );
   useEffect(() => {
-    const income = salary.reduce((a, b) => a + b.incomeAmount, 0);
-    const allExpense = expense.reduce((a, b) => a + b.expenseAmount, 0);
-    setBalance(income - allExpense - transferToSaving);
+    setBalance(income - allExpense - allSaving);
   });
 
   return (
@@ -31,7 +35,7 @@ const App = () => {
           <Expense getExpense={setExpense} />
         </div>
         <div>
-          <Saving getSavingTarget={setSavingTarget} />
+          <Saving getSavingTarget={setSavingTarget} totalSaving={allSaving} />
         </div>
       </div>
       <br />

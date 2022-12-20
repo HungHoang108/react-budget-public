@@ -1,11 +1,12 @@
 import React, { useState, ChangeEvent } from "react";
 import { ExpenseClass } from "../../class/expense";
 
-export const Expense = (props: { getExpense: React.Dispatch<React.SetStateAction<ExpenseClass[]>> }) => {
+export const Expense = (props: {
+  getExpense: React.Dispatch<React.SetStateAction<ExpenseClass[]>>;
+}) => {
   const [expenseSource, setExpenseSource] = useState<string>("");
   const [expenseAmount, setExpenseAmount] = useState<number>(0);
   // const [date, setDate] = useState<Date>()
-
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.name === "expenseSource") {
@@ -19,8 +20,8 @@ export const Expense = (props: { getExpense: React.Dispatch<React.SetStateAction
     const newExpense = {
       expenseSource: expenseSource,
       expenseAmount: expenseAmount,
-    };;
-    props.getExpense([newExpense]);
+    };
+    props.getExpense((prev) => [...prev, newExpense]);
   };
 
   return (

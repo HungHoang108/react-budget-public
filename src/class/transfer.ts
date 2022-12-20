@@ -4,3 +4,10 @@ export class TransferAmount {
         this.transferAmount = transferAmount
     }
 }
+
+export class TotalTransfer {
+    totalTransferAmount: number
+    constructor(  totalTransferAmount: number) {
+        this.totalTransferAmount = totalTransferAmount
+    }
+}

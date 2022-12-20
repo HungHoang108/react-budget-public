@@ -1,6 +1,7 @@
-export class AllSaving {
-    targetNumber: number
-    constructor(  targetNumber: number) {
-        this.targetNumber = targetNumber
+
+export class savingAmount {
+    savingNumber: number
+    constructor(  savingNumber: number) {
+        this.savingNumber = savingNumber
     }
 }

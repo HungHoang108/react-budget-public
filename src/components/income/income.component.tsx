@@ -1,9 +1,9 @@
-
 import { useState, ChangeEvent } from "react";
 import { IncomeClass } from "../../class/income";
 
-
-export const Income = (props: { getIncome: React.Dispatch<React.SetStateAction<IncomeClass[]>>}) => {
+export const Income = (props: {
+  getIncome: React.Dispatch<React.SetStateAction<IncomeClass[]>>;
+}) => {
   const [incomeSource, setIncomeSource] = useState("");
   const [incomeAmount, setIncomeAmount] = useState(0);
 
@@ -23,8 +23,8 @@ export const Income = (props: { getIncome: React.Dispatch<React.SetStateAction<I
       incomeSource: incomeSource,
       incomeAmount: incomeAmount,
     };
-    props.getIncome([newIncome]);
-    console.log(newIncome)
+    props.getIncome((prev) => [...prev, newIncome]);
+    console.log(newIncome);
   };
 
   return (
