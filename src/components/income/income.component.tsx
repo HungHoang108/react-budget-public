@@ -1,20 +1,20 @@
-import React from "react";
-import { useState, FC, ChangeEvent } from "react";
+
+import { useState, ChangeEvent } from "react";
 import { IncomeClass } from "../../class/income";
 
-export const Income = (props: { getIncome: (income: any) => void }) => {
-  const [incomeSource, setIncomeSource] = useState<string>("");
-  const [incomeAmount, setIncomeAmount] = useState<number>(0);
-  // const [date, setDate] = useState<Date>()
-  const [income, setIncome] = useState<IncomeClass[]>([]);
+
+export const Income = (props: { getIncome: React.Dispatch<React.SetStateAction<IncomeClass[]>>}) => {
+  const [incomeSource, setIncomeSource] = useState("");
+  const [incomeAmount, setIncomeAmount] = useState(0);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.name === "incomeSource") {
       setIncomeSource(e.target.value);
     }
-
     if (e.target.name === "incomeAmount") {
-      setIncomeAmount(Number(e.target.value));
+      const newIncome = Number(e.target.value);
+      setIncomeAmount(newIncome);
+      console.log(newIncome);
     }
   };
 
@@ -23,9 +23,10 @@ export const Income = (props: { getIncome: (income: any) => void }) => {
       incomeSource: incomeSource,
       incomeAmount: incomeAmount,
     };
-    setIncome([...income, newIncome]);
-    props.getIncome(income);
+    props.getIncome([newIncome]);
+    console.log(newIncome)
   };
+
   return (
     <div>
       <div>

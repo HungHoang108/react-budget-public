@@ -1,13 +1,10 @@
-import React from "react";
-import { useState, FC, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 
-import { TransferAmount } from "../../class/transfer";
-import { IncomeClass } from "../../class/income";
-import { ExpenseClass } from "../../class/expense";
-
-export const Balance = (props: { getTransfer: (arg0: TransferAmount[]) => void; salary: IncomeClass[]; expense: ExpenseClass[]; }) => {
-  const [transferAmount, setTransferAmount] = useState<number>(0);
-  const [allTransfer, setAllTransfer] = useState<TransferAmount[]>([]);
+export const Balance = (props: {
+  getTransfer: (arg0: number) => void;
+  totalBalance: number;
+}) => {
+  const [transferAmount, setTransferAmount] = useState(0);
   const [transferStatus, setTransferStatus] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -15,24 +12,13 @@ export const Balance = (props: { getTransfer: (arg0: TransferAmount[]) => void; 
   };
 
   const addTransfer = (): void => {
-    const newTransfer = {
-      transferAmount: transferAmount,
-    };
-    setAllTransfer([...allTransfer, newTransfer]);
-    props.getTransfer(allTransfer);
-    setTransferStatus(!transferStatus);
+    props.getTransfer(transferAmount);
+    // setTransferStatus(!transferStatus);
   };
-
-  let salary = props.salary?.reduce((x, y)=> x + y.incomeAmount, 0)
-  console.log("salary ", salary)
-  const expense = props.expense?.reduce((x, y)=> x + y.expenseAmount, 0)
-  const transferAmountToSavingAccount =
-    transferAmount && !transferStatus ? transferAmount : 0;
-  let balance = salary - expense;
 
   return (
     <div>
-      <h4>Current balance: {balance}</h4>
+      <h4>Total Balance : {props.totalBalance}</h4>
       <h4>Transfer to saving account</h4>
       <input
         type="number"

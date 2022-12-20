@@ -1,13 +1,11 @@
-import React, { useState, FC, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import "./saving.styles.component.css";
 import { AllSaving } from "../../class/saving-target";
 
-// : {
-//   getSavingTarget: (arg0: number) => void;
-//   savingAmount: AllSaving[];
-// }
-export const Saving = (props: { getSavingTarget: (arg0: number) => void; }) => {
-  const [savingTarget, setSavingTarget] = useState<number>(0);
+export const Saving = (props: {
+  getSavingTarget: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const [savingTarget, setSavingTarget] = useState(0);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setSavingTarget(Number(e.target.value));
@@ -36,7 +34,7 @@ export const Saving = (props: { getSavingTarget: (arg0: number) => void; }) => {
         <h4>Progress: </h4>
       </div>
       <div className="progress">
-        <div className="color"></div>
+        <progress />
       </div>
     </div>
   );
