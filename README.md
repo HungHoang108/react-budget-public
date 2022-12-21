@@ -1,7 +1,5 @@
 # Getting Started with React Components & React Hooks
 
-## Live app / on progress [here](https://endearing-faloodeh-7c49c2.netlify.app/)
-
 This assignment requires also TypeScript when passing props to React Components
 
 ## Requirements
