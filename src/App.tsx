@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { Expense } from "./components/expense/expense.component";
 import { Income } from "./components/income/income.component";
 import { Saving } from "./components/saving/saving.component";
@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { ExpenseClass } from "./class/expense";
 import { IncomeClass } from "./class/income";
 import { TotalTransfer } from "./class/transfer";
+import "./"
 
 const App = () => {
   const [salary, setSalary] = useState<IncomeClass[]>([]);
@@ -15,6 +16,9 @@ const App = () => {
   const [savingTarget, setSavingTarget] = useState(0);
   const [transferToSaving, setTransfertoSaving] = useState<TotalTransfer[]>([]);
   const [balance, setBalance] = useState(0);
+  
+
+
   const income = salary.reduce((a, b) => a + b.incomeAmount, 0);
   const allExpense = expense.reduce((a, b) => a + b.expenseAmount, 0);
   const allSaving = transferToSaving.reduce(

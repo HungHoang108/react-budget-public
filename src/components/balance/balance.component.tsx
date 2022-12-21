@@ -6,7 +6,7 @@ export const Balance = (props: {
   totalBalance: number;
 }) => {
   const [transferAmount, setTransferAmount] = useState(0);
-  const [totalTransfer, setTotalTransfer] = useState<TotalTransfer[]>()
+  const [totalTransfer, setTotalTransfer] = useState<TotalTransfer[]>();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setTransferAmount(Number(e.target.value));
@@ -14,22 +14,20 @@ export const Balance = (props: {
 
   const addTransfer = (): void => {
     const newTransfer = {
-      totalTransferAmount: transferAmount
-    
+      totalTransferAmount: transferAmount,
     };
-    props.getTransfer((prev)=> [...prev, newTransfer]);
+    props.getTransfer((prev) => [...prev, newTransfer]);
     console.log("----", transferAmount);
   };
 
   return (
     <div>
-      <h4>Total Balance : {props.totalBalance}</h4>
+      <h4>
+        Total Balance : {props.totalBalance >= 0 ? props.totalBalance : 0}
+      </h4>
+      {props.totalBalance < 0 ? <p><i style={{color: "red"}}>Balance must be bigger than 0</i></p> : null}
       <h4>Transfer to saving account</h4>
-      <input
-        type="number"
-        name="transferAmount"
-        onChange={handleChange}
-      />
+      <input type="number" name="transferAmount" onChange={handleChange} />
       <button onClick={addTransfer}>Transfer</button>
     </div>
   );

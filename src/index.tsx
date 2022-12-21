@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.scss';
 import App from './App';
-// import { Context } from './context/context';
 
 
 const root = ReactDOM.createRoot(
@@ -10,9 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    {/* <Context > */}
       <App /> 
-    {/* </Context> */}
   </React.StrictMode>
 );
 

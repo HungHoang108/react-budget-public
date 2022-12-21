@@ -6,13 +6,15 @@ export const Expense = (props: {
 }) => {
   const [expenseSource, setExpenseSource] = useState<string>("");
   const [expenseAmount, setExpenseAmount] = useState<number>(0);
-  // const [date, setDate] = useState<Date>()
+  const [date, setDate] = useState("")
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.name === "expenseSource") {
       setExpenseSource(e.target.value);
     } else if (e.target.name === "expenseAmount") {
       setExpenseAmount(Number(e.target.value));
+    } else {
+      setDate(e.target.value)
     }
   };
 
@@ -20,6 +22,7 @@ export const Expense = (props: {
     const newExpense = {
       expenseSource: expenseSource,
       expenseAmount: expenseAmount,
+      date : date
     };
     props.getExpense((prev) => [...prev, newExpense]);
   };

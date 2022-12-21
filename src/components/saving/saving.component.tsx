@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
-import "./saving.styles.component.css";
 import { savingAmount } from "../../class/saving-target";
 
 export const Saving = (props: {
@@ -8,6 +7,7 @@ export const Saving = (props: {
 }) => {
   const [savingTarget, setSavingTarget] = useState(0);
   const [savingAmount, setSavingAmount] = useState<savingAmount[]>();
+  const [status, setStatus] = useState(0);
 
   useEffect(() => {
     const saving = {
@@ -15,16 +15,14 @@ export const Saving = (props: {
     };
     setSavingAmount([saving]);
   }, []);
-  const test = savingAmount?.reduce((a, b) => a + b.savingNumber, 0);
-  const total = () => {
-    savingAmount?.reduce((a, b) => a + b.savingNumber, 0);
-  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setSavingTarget(Number(e.target.value));
   };
 
   const addSavingTarget = (): void => {
     props.getSavingTarget(savingTarget);
+    setStatus(savingTarget);
   };
 
   return (
@@ -42,11 +40,13 @@ export const Saving = (props: {
       <button onClick={addSavingTarget}>Set saving target</button>
       <div>
         <h4>Current saving: {props.totalSaving}</h4>
-        <h4>Target: {savingTarget}</h4>
-        <h4>Progress: {Math.round(props.totalSaving/savingTarget*100)}%</h4>
+        <h4>Target: {status}</h4>
+        <h4>
+          Progress: {savingTarget && Math.round((props.totalSaving / savingTarget) * 100)}%
+        </h4>
       </div>
-      <div className="progress">
-        <progress value={props.totalSaving} max={savingTarget}/>
+      <div>
+        <progress value={props.totalSaving } max={savingTarget} />
       </div>
     </div>
   );
